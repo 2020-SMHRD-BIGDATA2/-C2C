@@ -57,14 +57,13 @@ public class CycleDAO {
 
 			String sql = "INSERT INTO CLIENT VALUES(?,?,?,?)";
 			psmt = conn.prepareStatement(sql);
-			
+
 			Random ran = new Random();
-			
+
 			psmt.setString(1, vo.getId());
 			psmt.setString(2, vo.getPw());
 			psmt.setString(3, vo.getName());
 			psmt.setString(4, vo.getPn());
-			
 
 			cnt = psmt.executeUpdate();
 
@@ -79,8 +78,8 @@ public class CycleDAO {
 		return cnt;
 	}
 
-	public String login(CycleVO vo) {
-		String name = null;
+	public ArrayList<CycleVO> login(CycleVO vo) {
+		ArrayList<CycleVO> list = new ArrayList<CycleVO>();
 
 		// try-catch하는 이유, 클래스를 찾을 수 없는 상황에 대한 예외처리
 		try {
@@ -95,8 +94,11 @@ public class CycleDAO {
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
-				name = rs.getString("name");
-
+				String id = rs.getString(1);
+				String pw = rs.getString(2);
+				String name = rs.getString(3);
+				String pn = rs.getString(4);
+				list.add(new CycleVO(id, pw, name, pn));
 			}
 
 		} catch (SQLException e) {
@@ -105,7 +107,42 @@ public class CycleDAO {
 			close();
 		}
 
-		return name;
+		return list;
+	}
+	
+	
+	public ArrayList<CycleVO> mypage(CycleVO vo) {
+		ArrayList<CycleVO> list = new ArrayList<CycleVO>();
+
+		// try-catch하는 이유, 클래스를 찾을 수 없는 상황에 대한 예외처리
+		try {
+			getConnection();
+
+			String sql = "SELECT * FROM RENTAL WHERE ID = ? AND PW = ?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, vo.getId());
+			psmt.setString(2, vo.getPw());
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				String id = rs.getString(1);
+				String pw = rs.getString(2);
+				String name = rs.getString(3);
+				String pn = rs.getString(4);
+				String payment = rs.getString(5);
+				
+				list.add(new CycleVO(id, pw, name, pn,payment));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return list;
 	}
 
 //	public ArrayList<CycleVO> selectAll() {
@@ -141,16 +178,16 @@ public class CycleDAO {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
-			
+
 			int cnt = psmt.executeUpdate();
-			
-			if(cnt>0) {
+
+			if (cnt > 0) {
 				return cnt;
 			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
 		return 0;
@@ -158,15 +195,15 @@ public class CycleDAO {
 
 	public boolean idCheck(String text) {
 		getConnection();
-		
+
 		boolean isCheck = false;
 		try {
-			
+
 			String sql = "SELECT * FROM CLIENT WHERE ID = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, text);
 			rs = psmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				isCheck = true;
 			}
 		} catch (SQLException e) {
@@ -177,23 +214,3 @@ public class CycleDAO {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

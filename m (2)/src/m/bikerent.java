@@ -26,31 +26,30 @@ public class bikerent {
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					bikerent window = new bikerent();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					bikerent window = new bikerent();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
 	 */
-	public bikerent(CycleVO vo) {
-		initialize(vo);
-		frame.setVisible(true);
+	public bikerent() {
+		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(CycleVO vo) {
+	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 638);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,8 +149,7 @@ public class bikerent {
 			public void mouseClicked(MouseEvent e) {
 				
 				frame.dispose();
-				home home = new home(vo);
-				home.frame.setVisible(true);
+				home.main(null);
 				
 			}
 		});

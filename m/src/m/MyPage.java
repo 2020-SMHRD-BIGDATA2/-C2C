@@ -21,7 +21,7 @@ public class MyPage {
 	public JFrame frame;
 	private JButton btn_home;
 	private String ticket;
-	private JLabel lbl_ticket;
+	private JLabel lbl_ticket, lbl_name;
 	private String date;
 	private FontMake fm = new FontMake();
 
@@ -36,30 +36,36 @@ public class MyPage {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MyPage window = new MyPage();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					MyPage window = new MyPage();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public MyPage() {
-		initialize();
+	public MyPage(CycleVO vo) {
+		initialize(vo);
+		frame.setVisible(true);
+
+
+		
+		// 2. 상태정보 보여주기
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(CycleVO vo) {
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		fm.fontChange(ge);
@@ -74,30 +80,33 @@ public class MyPage {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		JLabel lbl_name = new JLabel(Login.name);
+		lbl_name = new JLabel();
 		lbl_name.setFont(new Font("KoPubWorld돋움체 Light", Font.BOLD, 20));
+		lbl_name.setText(vo.getName());
 		lbl_name.setHorizontalAlignment(SwingConstants.RIGHT);
-		lbl_name.setBounds(201, 362, 115, 33);
+		lbl_name.setBounds(201, 356, 115, 47);
 		panel.add(lbl_name);
 
 		lbl_ticket = new JLabel();
-//		lbl_ticket.setText(Payment1.ticket);
-		if (Payment1.ticket.equals("7일권 이용중")) {
-			URL url = this.getClass().getResource("../image/week.png");
-			String path = url.getPath(); /// url.getPaht << 위 경로로 사용하는겨 상대경로
-			Image image = new ImageIcon(path).getImage();
-			lbl_ticket.setIcon(new ImageIcon(image));
-		}else if (Payment1.ticket.equals("30일권 이용중")) {
-			URL url = this.getClass().getResource("../image/month.png");
-			String path = url.getPath(); /// url.getPaht << 위 경로로 사용하는겨 상대경로
-			Image image = new ImageIcon(path).getImage();
-			lbl_ticket.setIcon(new ImageIcon(image));
-		}else if (Payment1.ticket.equals("365일권 이용중")) {
-			URL url = this.getClass().getResource("../image/year.png");
-			String path = url.getPath(); /// url.getPaht << 위 경로로 사용하는겨 상대경로
-			Image image = new ImageIcon(path).getImage();
-			lbl_ticket.setIcon(new ImageIcon(image));
-		}
+		// 1. 결제 상태인지 아닌지 판단 
+		String payment = vo.getPayment();
+		System.out.println(payment);
+//		if (payment.equals("7일")) {
+//			URL url = this.getClass().getResource("../image/week.png");
+//			String path = url.getPath(); /// url.getPath << 위 경로로 사용하는겨 상대경로
+//			Image image = new ImageIcon(path).getImage();
+//			lbl_ticket.setIcon(new ImageIcon(image));
+//		} else if (payment.equals("30일")) {
+//			URL url = this.getClass().getResource("../image/month.png");
+//			String path = url.getPath(); /// url.getPath << 위 경로로 사용하는겨 상대경로
+//			Image image = new ImageIcon(path).getImage();
+//			lbl_ticket.setIcon(new ImageIcon(image));
+//		} else if (payment.equals("365일")) {
+//			URL url = this.getClass().getResource("../image/year.png");
+//			String path = url.getPath(); /// url.getPath << 위 경로로 사용하는겨 상대경로
+//			Image image = new ImageIcon(path).getImage();
+//			lbl_ticket.setIcon(new ImageIcon(image));
+//		}
 		lbl_ticket.setFont(new Font("KoPubWorld돋움체 Light", Font.BOLD, 20));
 		lbl_ticket.setBounds(517, 342, 145, 41);
 		panel.add(lbl_ticket);
@@ -120,7 +129,8 @@ public class MyPage {
 			public void mouseClicked(MouseEvent e) {
 
 				frame.dispose();
-				home.main(null);
+				home home = new home(vo);
+				home.frame.setVisible(true);
 
 			}
 		});
@@ -137,8 +147,9 @@ public class MyPage {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				JOptionPane.showMessageDialog(null, "반납하시겠습니까? ", "반납", JOptionPane.INFORMATION_MESSAGE);// 경고메세지
-				JOptionPane.showMessageDialog(null, "반납이 완료되었습니다. ", "반납", JOptionPane.INFORMATION_MESSAGE);// 경고메세지
+				frame.dispose();
+				home home = new home(vo);
+				home.frame.setVisible(true);
 
 			}
 		});

@@ -1,4 +1,4 @@
-package 하나둘셋야;
+package m;
 
 import java.awt.Font;
 import java.awt.FontFormatException;

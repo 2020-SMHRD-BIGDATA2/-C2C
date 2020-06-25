@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Payment1 {
 
@@ -24,30 +26,32 @@ public class Payment1 {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Payment1 window = new Payment1();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Payment1 window = new Payment1();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public Payment1() {
-		initialize();
+	public Payment1(CycleVO vo) {
+		initialize(vo);
+		frame.setVisible(true);
+
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(CycleVO vo) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 622);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,6 +96,10 @@ public class Payment1 {
 		group.add(cbx_year);
 
 		JButton btn_payment = new JButton("");
+		btn_payment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_payment.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -100,31 +108,28 @@ public class Payment1 {
 				if (cbx_time.isSelected()) {
 //					money = 1000;
 					ticket = "시간권 이용중";
-					Payment3 payment3 = new Payment3();
+					Payment3 payment3 = new Payment3(vo);
 					payment3.setMoney(money);
-					payment3.frame.setVisible(true);
 
 				} else if (cbx_week.isSelected()) {
 					money = 5000;
 					ticket = "7일권 이용중";
-					Payment2 payment2 = new Payment2();
-					MyPage myPage = new MyPage();
-					myPage.setTicket(ticket);
+					Payment2 payment2 = new Payment2(vo);
+					payment2.setTicket(ticket);
 					payment2.setMoney(money);
-					payment2.frame.setVisible(true);
 
 				} else if (cbx_month.isSelected()) {
 					money = 10000;
 					ticket = "30일권 이용중";
-					Payment2 payment2 = new Payment2();
+					Payment2 payment2 = new Payment2(vo);
+					payment2.setTicket(ticket);
 					payment2.setMoney(money);
-					payment2.frame.setVisible(true);
 				} else if (cbx_year.isSelected()) {
 					money = 30000;
 					ticket = "365일권 이용중";
-					Payment2 payment2 = new Payment2();
+					Payment2 payment2 = new Payment2(vo);
+					payment2.setTicket(ticket);
 					payment2.setMoney(money);
-					payment2.frame.setVisible(true);
 				}
 
 			}

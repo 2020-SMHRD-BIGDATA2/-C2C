@@ -1,4 +1,4 @@
-package 하나둘셋야;
+package m;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.Random;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -160,7 +161,9 @@ public class Join {
 		btn_check.setBorderPainted(false);
 		btn_check.setContentAreaFilled(false);
 		
-		String path = "C:\\Users\\SMHRD\\Desktop\\java_1\\하나둘셋야\\src\\image\\join.jpg";
+		
+		URL url = this.getClass().getResource("../image/join_00.png");
+		String path = url.getPath();
 		Image image = new ImageIcon(path).getImage();
 		
 		JLabel lbl_bg = new JLabel(new ImageIcon(image.getScaledInstance(960,540, Image.SCALE_SMOOTH)));

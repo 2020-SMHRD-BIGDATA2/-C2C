@@ -1,4 +1,4 @@
-package 하나둘셋야;
+package m;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -63,7 +64,7 @@ public class Login {
 		panel.setLayout(null);
 
 		txt_id = new JTextField();
-		txt_id.setBounds(386, 189, 222, 30);
+		txt_id.setBounds(383, 182, 232, 40);
 		panel.add(txt_id);
 		txt_id.setColumns(10);
 		txt_id.setOpaque(false);
@@ -71,7 +72,7 @@ public class Login {
 		txt_id.setFont(new Font("KoPubWorld돋움체 Light", Font.PLAIN, 15));
 		
 		txt_pw = new JPasswordField();
-		txt_pw.setBounds(386, 256, 232, 30);
+		txt_pw.setBounds(394, 246, 232, 40);
 		panel.add(txt_pw);
 		txt_pw.setOpaque(false);
 		txt_pw.setBorder(null);
@@ -91,13 +92,13 @@ public class Login {
 				name = dao.login(vo);
 				if (name != null) { // 값이 입력돼서 로그인성공!
 					JOptionPane.showMessageDialog(null, name + "님 환영합니다.");
-					Login.main(null);
+					home.main(null);
 				} else {
 					JOptionPane.showMessageDialog(null, "로그인 실패");
 				}
 			}
 		});
-		btn_login.setBounds(503, 351, 135, 40);
+		btn_login.setBounds(499, 352, 140, 40);
 		panel.add(btn_login);
 		btn_login.setOpaque(false);
 		btn_login.setBorder(null);
@@ -111,13 +112,17 @@ public class Login {
 				
 			}
 		});
-		btn_join.setBounds(343, 351, 135, 40);
+		btn_join.setBounds(345, 352, 142, 40);
 		panel.add(btn_join);
 		btn_join.setOpaque(false);
 		btn_join.setBorder(null);
 		btn_join.setContentAreaFilled(false);
 
-		String path = "C:\\Users\\SMHRD\\Desktop\\java_1\\하나둘셋야\\src\\image\\login.jpg";
+		
+		//상대경로
+		URL url = this.getClass().getResource("../image/iogin_00.png");
+		String path = url.getPath();
+		System.out.println(path);
 		Image image = new ImageIcon(path).getImage();
 
 		JLabel lbl_bg = new JLabel(new ImageIcon(image.getScaledInstance(960,540, Image.SCALE_SMOOTH)));

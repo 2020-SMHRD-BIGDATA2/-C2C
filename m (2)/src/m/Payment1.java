@@ -1,4 +1,4 @@
-package 하나둘셋야;
+package m;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 public class Payment1 {
 
@@ -58,26 +59,26 @@ public class Payment1 {
 		JCheckBox cbx_time = new JCheckBox("");
 		cbx_time.setHorizontalAlignment(SwingConstants.CENTER);
 		cbx_time.setBackground(Color.WHITE);
-		cbx_time.setBounds(100, 355, 96, 23);
+		cbx_time.setBounds(168, 355, 96, 23);
 		panel.add(cbx_time);
 		
 		
 		JCheckBox cbx_week = new JCheckBox("");
 		cbx_week.setHorizontalAlignment(SwingConstants.CENTER);
 		cbx_week.setBackground(Color.WHITE);
-		cbx_week.setBounds(330, 355, 96, 23);
+		cbx_week.setBounds(353, 355, 96, 23);
 		panel.add(cbx_week);
 		
 		JCheckBox cbx_month = new JCheckBox("");
 		cbx_month.setHorizontalAlignment(SwingConstants.CENTER);
 		cbx_month.setBackground(Color.WHITE);
-		cbx_month.setBounds(560, 355, 96, 23);
+		cbx_month.setBounds(534, 355, 96, 23);
 		panel.add(cbx_month);
 		
 		JCheckBox cbx_year = new JCheckBox("");
 		cbx_year.setHorizontalAlignment(SwingConstants.CENTER);
 		cbx_year.setBackground(Color.WHITE);
-		cbx_year.setBounds(788, 355, 96, 23);
+		cbx_year.setBounds(715, 355, 96, 23);
 		panel.add(cbx_year);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -124,14 +125,16 @@ public class Payment1 {
 				
 			}
 		});
-		btn_payment.setBounds(230, 497, 545, 63);
+		btn_payment.setBounds(286, 453, 421, 47);
 		panel.add(btn_payment);
 		btn_payment.setOpaque(false);
 		btn_payment.setBorder(null);
 		btn_payment.setContentAreaFilled(false);
 		
-		String path = "C:\\Users\\SMHRD\\Desktop\\java_1\\하나둘셋야\\src\\image\\payment1.jpg";
-		Image image = new ImageIcon(path).getImage();
+		
+		URL url = this.getClass().getResource("../image/payment_00.png");
+		String path = url.getPath(); /// url.getPaht << 위 경로로 사용하는겨 상대경로 
+		Image image = new ImageIcon(path).getImage(); 
 		panel.setLayout(null);
 		
 		JLabel lbl_bg = new JLabel(new ImageIcon(image.getScaledInstance(978, 600, Image.SCALE_SMOOTH)));

@@ -1,4 +1,4 @@
-package 하나둘셋야;
+package m;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

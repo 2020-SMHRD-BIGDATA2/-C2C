@@ -50,14 +50,15 @@ public class Payment3 {
 		price.setText(money + "");
 	}
 
-	public Payment3() {
-		initialize();
+	public Payment3(CycleVO vo) {
+		initialize(vo);
+		frame.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(CycleVO vo) {
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		fm.fontChange(ge);
@@ -146,7 +147,8 @@ public class Payment3 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// DB연결해서 ? 결제완료 하면 결제가 완료되었습니다. 창 띄우기!
-				MyPage.main(null);
+				MyPage myPage = new MyPage(vo);
+				frame.dispose();
 
 			}
 		});

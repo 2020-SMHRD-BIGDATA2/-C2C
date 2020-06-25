@@ -32,20 +32,26 @@ public class Payment2 {
 	private int money;
 	private JLabel price;
 	private FontMake fm = new FontMake();
+	private String ticket;
 
 	public void setMoney(int money) {
 		this.money = money;
 		price.setText(money + "");
 	}
 
-	public Payment2() {
-		initialize();
+	public void setTicket(String ticket) {
+		this.ticket = ticket;
+	}
+
+	public Payment2(CycleVO vo) {
+		initialize(vo);
+		frame.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(CycleVO vo) {
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		fm.fontChange(ge);
@@ -134,7 +140,9 @@ public class Payment2 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// DB연결해서 ? 결제완료 하면 결제가 완료되었습니다. 창 띄우기!
-				MyPage.main(null);
+
+				MyPage mypage = new MyPage(vo);
+				mypage.setTicket(ticket);
 
 			}
 		});
@@ -149,9 +157,8 @@ public class Payment2 {
 		panel.add(price);
 		price.setFont(new Font("카페24 당당해", Font.PLAIN, 25));
 
-		
 		URL url = this.getClass().getResource("../image/paynotime_00.png");
-		String path = url.getPath(); /// url.getPaht << 위 경로로 사용하는겨 상대경로 
+		String path = url.getPath(); /// url.getPaht << 위 경로로 사용하는겨 상대경로
 		Image image = new ImageIcon(path).getImage();
 		panel.setLayout(null);
 

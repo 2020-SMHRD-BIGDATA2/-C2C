@@ -6,6 +6,7 @@ public class CycleVO {
 	private String pw;
 	private String name;
 	private String pn;
+	private String payment;
 	
 	
 	public CycleVO(String id, String pw, String name, String pn) {
@@ -15,12 +16,36 @@ public class CycleVO {
 		this.name = name;
 		this.pn = pn;
 	}
+	
+	public CycleVO(String id, String pw, String name, String pn, String payment) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.pn = pn;
+		this.payment = payment;
+	}
+
+
+	public String getPayment() {
+		return payment;
+	}
+
+
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
 
 
 	public CycleVO(String id, String pw) {
 		super();
 		this.id = id;
 		this.pw = pw;
+	}
+	
+	public CycleVO(String name) {
+		super();
+		this.name = name;
 	}
 
 
